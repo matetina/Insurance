@@ -126,10 +126,24 @@ dim(belgium_shape_sf)
 simple_shp = st_simplify(belgium_shape_sf, dTolerance = 0.00001)
 qtm(simple_shp)
 
+model.gam.full= gam(nbrtotc~s(ageph)+s(long,lat,bs="tp")+agecar+sexp+fuelc+
+                 split+fleetc+usec+fleetc+sportc+coverp+powerc,
+               offset=log(duree), method= "REML", family=poisson, train)
+summary(model.gam.full)
+
+AIC(model.gam.full)#80611.94
+BIC(model.gam.full)#81059.09
+
+
 model.gam= gam(nbrtotc~s(ageph)+s(long,lat,bs="tp")+agecar+sexp+fuelc+
-              split+fleetc+usec+fleetc+sportc+coverp+powerc,
-            offset=log(duree), method= "REML", family=poisson, train)
+                 split+fleetc+sportc+coverp+powerc,
+               offset=log(duree), method= "REML", family=poisson, train)
 summary(model.gam)
+
+AIC(model.gam)#80601.43
+BIC(model.gam)#81048.34
+
+
 model.gam$sp
 plot(model.gam, pages=1, scheme=0)
 plot(model.gam, pages=1, scheme=1)
