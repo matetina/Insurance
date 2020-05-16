@@ -110,8 +110,8 @@ glm.model2=glm(average~ageph+codposs+agecar+
 summary(glm.model2)
 
 
-model1=stepAIC(glm.model2,k=2, direction="both", scope=list(upper=~., lower=~1))      
-summary(model1)
+model2=stepAIC(glm.model2,k=2, direction="both", scope=list(upper=~., lower=~1))      
+summary(model2)
 
 
 
